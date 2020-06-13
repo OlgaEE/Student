@@ -10,10 +10,18 @@ public class CityRegisterValidator {
     private String login;
     private String password;
 
+    private CityRegisterChecker personChecker;
+
+    public CityRegisterValidator() {
+        personChecker = new FakeCityRegisterChecker();
+    }
+
     public AnswerCityRegister checkCityRegister(StudentOrder so) {
-        System.out.println("SaveStudentOrder is running." + hostName + " login " + login + " password " + password);
+        personChecker.checkPerson(so.getHusband());
+        personChecker.checkPerson(so.getWife());
+        personChecker.checkPerson(so.getChild());
         AnswerCityRegister ans = new AnswerCityRegister();
-        ans.success = false;  // проверка в CityRegister не прошла
+        //ans.success = false;  // проверка в CityRegister не прошла
         return ans;
     }
 }
