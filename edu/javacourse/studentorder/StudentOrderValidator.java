@@ -8,6 +8,9 @@ import edu.javacourse.studentorder.domain.wedding.AnswerWedding;
 import edu.javacourse.studentorder.mail.MailSender;
 import edu.javacourse.studentorder.validator.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class StudentOrderValidator {
 
@@ -32,25 +35,26 @@ public class StudentOrderValidator {
     }
 
     public void checkAll() {
-            StudentOrder[] soArray = readStudentOrders();
+        List<StudentOrder> soList = readStudentOrders();
 
 //           for (int c = 0; c < soArray.length; c++) {
 //                System.out.println();
 //                checkOneOrder(soArray[c]);
 //            }
-            for (StudentOrder so : soArray) {
+            for (StudentOrder so : soList) {
                 System.out.println();
                 checkOneOrder(so);
             }
     }
 
-    public StudentOrder[] readStudentOrders() {
-        StudentOrder[] soArray = new StudentOrder[3];  //count of orders
+    public List<StudentOrder> readStudentOrders() {
+        List<StudentOrder> soList = new LinkedList<>();  //count of orders
 
-        for (int c = 0; c < soArray.length; c++) {
-            soArray[c] = SaveStudentOrder.buildStudentOrder(c);
+        for (int c = 0; c < 5; c++) {
+            StudentOrder so = SaveStudentOrder.buildStudentOrder(c);
+            soList.add(so);
         }
-        return soArray;
+        return soList;
     }
 
     public void checkOneOrder(StudentOrder so) {
