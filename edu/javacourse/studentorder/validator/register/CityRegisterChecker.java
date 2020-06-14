@@ -3,8 +3,10 @@ package edu.javacourse.studentorder.validator.register;
 import edu.javacourse.studentorder.domain.register.CityRegisterResponce;
 import edu.javacourse.studentorder.domain.Person;
 import edu.javacourse.studentorder.exception.CityRegisterException;
+import edu.javacourse.studentorder.exception.TransportException;
 
 public interface CityRegisterChecker
 {
-    CityRegisterResponce checkPerson(Person person) throws CityRegisterException;
+    CityRegisterResponce checkPerson(Person person)
+            throws CityRegisterException, TransportException;
 }
