@@ -1,9 +1,11 @@
 package edu.javacourse.studentorder.validator;
 
 import edu.javacourse.studentorder.domain.Child;
+import edu.javacourse.studentorder.domain.Person;
 import edu.javacourse.studentorder.domain.StudentOrder;
 import edu.javacourse.studentorder.domain.register.AnswerCityRegister;
-import edu.javacourse.studentorder.domain.register.CityRegisterCheckerResponce;
+import edu.javacourse.studentorder.domain.register.AnswerCityRegisterItem;
+import edu.javacourse.studentorder.domain.register.CityRegisterResponce;
 import edu.javacourse.studentorder.exception.CityRegisterException;
 import edu.javacourse.studentorder.validator.register.CityRegisterChecker;
 import edu.javacourse.studentorder.validator.register.FakeCityRegisterChecker;
@@ -20,28 +22,26 @@ public class CityRegisterValidator {
     }
 
     public AnswerCityRegister checkCityRegister(StudentOrder so) {
+        AnswerCityRegister ans = new AnswerCityRegister();
+        //for (Iterator<Child> it = children.iterator(); it.hasNext(); ) {
+        //    Child child = it.next();
+        //    CityRegisterResponce cans = personChecker.checkPerson(child);
+        //}
+        ans.addItem(checkPerson(so.getHusband()));
+        ans.addItem(checkPerson(so.getWife()));
+        for (Child child : so.getChildren()) {
+            ans.addItem(checkPerson(child));
+        }
+
+        return ans;
+    }
+
+    private AnswerCityRegisterItem checkPerson(Person person) {
         try {
-            CityRegisterCheckerResponce hans = personChecker.checkPerson(so.getHusband());
-            CityRegisterCheckerResponce wans = personChecker.checkPerson(so.getWife());
-            List<Child> children = so.getChildren();
-            for (int i = 0; i < children.size(); i++) {
-                CityRegisterCheckerResponce cans = personChecker.checkPerson(children.get(i));
-            }
-
-            for (Iterator<Child> it = children.iterator(); it.hasNext(); ) {
-                Child child = it.next();
-                CityRegisterCheckerResponce cans = personChecker.checkPerson(child);
-            }
-
-            for (Child child : children) {
-                CityRegisterCheckerResponce cans = personChecker.checkPerson(child);
-            }
+            CityRegisterResponce cans = personChecker.checkPerson(person);
         } catch (CityRegisterException ex) {
             ex.printStackTrace(System.out);
         }
-
-        AnswerCityRegister ans = new AnswerCityRegister();
-        //ans.success = false;  // проверка в CityRegister не прошла
-        return ans;
+        return null;
     }
 }
