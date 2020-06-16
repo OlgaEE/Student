@@ -1,12 +1,22 @@
 package edu.javacourse.studentorder;
 
+import edu.javacourse.studentorder.dao.DictionaryDaoImpl;
 import edu.javacourse.studentorder.domain.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class SaveStudentOrder {
-    public static void main(String[] args) {
-        StudentOrder s = buildStudentOrder(10);
+    public static void main(String[] args) throws Exception {
+        //Class.forName("org.postgresql.Driver");
+        List<Street> d = new DictionaryDaoImpl().findStreets("sec");
+        for(Street s : d) {
+            System.out.println(s.getStreetName());
+        }
+//        StudentOrder s = buildStudentOrder(10);
 //        StudentOrder so = new StudentOrder();
 //        long ans = saveStudentOrder(so);
 //        System.out.println(ans);
@@ -24,7 +34,8 @@ public class SaveStudentOrder {
         so.setMarriageDate(LocalDate.of(2016, 7, 4));
         so.setMarriageOffice("Отдел ЗАГС");
 
-    Address address = new Address("195000", "Заневский пр.", "12", "", "142");
+        Street street = new Street(1L, "First Street");
+        Address address = new Address("195000", street, "12", "", "142");
 
         // Муж
         Adult husband = new Adult("Петров", "Виктор", "Сергеевич", LocalDate.of(1997, 8, 24));
