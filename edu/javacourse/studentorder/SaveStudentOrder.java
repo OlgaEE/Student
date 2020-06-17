@@ -12,7 +12,7 @@ import java.util.List;
 public class SaveStudentOrder {
     public static void main(String[] args) throws Exception {
         //Class.forName("org.postgresql.Driver");
-        List<Street> d = new DictionaryDaoImpl().findStreets("sec");
+        List<Street> d = new DictionaryDaoImpl().findStreets("d");
         for(Street s : d) {
             System.out.println(s.getStreetName());
         }
