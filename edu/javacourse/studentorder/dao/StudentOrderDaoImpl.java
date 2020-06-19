@@ -65,28 +65,39 @@ public class StudentOrderDaoImpl implements StudentOrderDao
              PreparedStatement stmt = con.prepareStatement(INSERT_ORDER, new String[]{"student_order_id"})) {
 
             // Header
-            stmt.setInt(1, StudentOrderStatus.START.ordinal());
-            stmt.setTimestamp(2, java.sql.Timestamp.valueOf(LocalDateTime.now()));
+            con.setAutoCommit(false);
+            try {
+                // Header
+                stmt.setInt(1, StudentOrderStatus.START.ordinal());
+                stmt.setTimestamp(2, java.sql.Timestamp.valueOf(LocalDateTime.now()));
 
-            // Husband and wife
-            setParamsForAdult(stmt, 3, so.getHusband());
-            setParamsForAdult(stmt, 16, so.getWife());
 
 
-            // Marriage
-            stmt.setString(29, so.getMarriageCertificateId());
-            stmt.setLong(30, so.getMarriageOffice().getOfficeId());
-            stmt.setDate(31, java.sql.Date.valueOf(so.getMarriageDate()));
+                // Husband and wife
+                setParamsForAdult(stmt, 3, so.getHusband());
+                setParamsForAdult(stmt, 16, so.getWife());
 
-            stmt.executeUpdate();
 
-            ResultSet gkRs = stmt.getGeneratedKeys();
-            if (gkRs.next()) {
-                result = gkRs.getLong(1);
+                // Marriage
+                stmt.setString(29, so.getMarriageCertificateId());
+                stmt.setLong(30, so.getMarriageOffice().getOfficeId());
+                stmt.setDate(31, java.sql.Date.valueOf(so.getMarriageDate()));
+
+                stmt.executeUpdate();
+
+                ResultSet gkRs = stmt.getGeneratedKeys();
+                if (gkRs.next()) {
+                    result = gkRs.getLong(1);
+                }
+                gkRs.close();
+
+                saveChildren(con, so, result);
+
+                con.commit();
+            } catch(SQLException ex) {
+                con.rollback();
+                throw ex;
             }
-            gkRs.close();
-
-            saveChildren(con, so, result);
 
         } catch (SQLException ex) {
             throw new DaoException(ex);
