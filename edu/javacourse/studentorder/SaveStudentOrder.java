@@ -11,7 +11,7 @@ import java.util.List;
 public class SaveStudentOrder {
     public static void main(String[] args) throws Exception {
         //Class.forName("org.postgresql.Driver");
-        List<Street> d = new DictionaryDaoImpl().findStreets("про");
+//        List<Street> d = new DictionaryDaoImpl().findStreets("про");
 //        for(Street s : d) {
 //            System.out.println(s.getStreetName());
 //        }
@@ -48,7 +48,11 @@ public class SaveStudentOrder {
         StudentOrder s = buildStudentOrder(10);
         StudentOrderDao dao = new StudentOrderDaoImpl();
         Long id = dao.saveStudentOrder(s);
-        System.out.println(id);
+//        System.out.println(id);
+        List<StudentOrder> soList = dao.getStudentOrders();
+        for(StudentOrder so : soList) {
+            System.out.println(so.getStudentOrderId());
+        }
 //        StudentOrder so = new StudentOrder();
 //        long ans = saveStudentOrder(so);
 //        System.out.println(ans);
@@ -80,6 +84,8 @@ public class SaveStudentOrder {
         husband.setIssueDepartment(po1);
         husband.setStudentId("" + (100000 + id));
         husband.setAddress(address);
+        husband.setUnivesity(new University(2L, ""));
+        husband.setStudentId("HH12345");
         // Жена
         Adult wife = new Adult("Петрова", "Вероника", "Алекссевна", LocalDate.of(1998, 3, 12));
         wife.setPassportSeria("" + (2000 + id));
@@ -89,6 +95,9 @@ public class SaveStudentOrder {
         wife.setIssueDepartment(po2);
         wife.setStudentId("" + (200000 + id));
         wife.setAddress(address);
+        wife.setUnivesity(new University(1L, ""));
+        wife.setStudentId("WW12345");
+
         // Ребенок
         Child child1 = new Child("Петрова", "Ирина", "Викторовна", LocalDate.of(2018, 6, 29));
         child1.setCertificateNumber("" + (300000 + id));
