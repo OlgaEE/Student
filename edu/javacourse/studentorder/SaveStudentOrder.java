@@ -45,9 +45,9 @@ public class SaveStudentOrder {
 //        for (CountryArea c : ca4) {
 //            System.out.println(c.getAreaId() + ":" + c.getAreaName());
 //        }
-        StudentOrder s = buildStudentOrder(10);
+//        StudentOrder s = buildStudentOrder(10);
         StudentOrderDao dao = new StudentOrderDaoImpl();
-        Long id = dao.saveStudentOrder(s);
+//        Long id = dao.saveStudentOrder(s);
 //        System.out.println(id);
         List<StudentOrder> soList = dao.getStudentOrders();
         for(StudentOrder so : soList) {
@@ -84,7 +84,7 @@ public class SaveStudentOrder {
         husband.setIssueDepartment(po1);
         husband.setStudentId("" + (100000 + id));
         husband.setAddress(address);
-        husband.setUnivesity(new University(2L, ""));
+        husband.setUniversity(new University(2L, ""));
         husband.setStudentId("HH12345");
         // Жена
         Adult wife = new Adult("Петрова", "Вероника", "Алекссевна", LocalDate.of(1998, 3, 12));
@@ -95,7 +95,7 @@ public class SaveStudentOrder {
         wife.setIssueDepartment(po2);
         wife.setStudentId("" + (200000 + id));
         wife.setAddress(address);
-        wife.setUnivesity(new University(1L, ""));
+        wife.setUniversity(new University(1L, ""));
         wife.setStudentId("WW12345");
 
         // Ребенок

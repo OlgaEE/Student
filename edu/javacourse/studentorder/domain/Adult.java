@@ -14,6 +14,10 @@ public class Adult extends Person {
         super(surName, givenName, patronymic, dateOfBirth);
     }
 
+    public Adult() {
+        super();
+    }
+
     public String getPassportSeria() {
         return passportSeria;
     }
@@ -46,11 +50,11 @@ public class Adult extends Person {
         this.issueDepartment = issueDepartment;
     }
 
-    public University getUnivesity() {
+    public University getUniversity() {
         return university;
     }
 
-    public void setUnivesity(University univesity) {
+    public void setUniversity(University university) {
         this.university = university;
     }
 
