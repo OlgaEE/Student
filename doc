@@ -1,4 +1,24 @@
 64 maven
 https://mvnrepository.com/artifact/org.postgresql/postgresql  for connect postgresql
 
-69
+72 added dependency SLF4J API Module https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+   added dependency SLF4J Simple Binding   https://mvnrepository.com/artifact/org.slf4j/slf4j-simple/2.0.0-alpha1
+${slf4j.version}  if we want to change the version, we change between <properties>
+
+73 added dependency SLF4J LOG4J 12 Binding https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12/2.0.0-alpha1
+    added dependecy Apache Log4j Core https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core/2.13.3
+    added log4j.xml to test/resources to create log-files in target about testing
+
+74  in log4j.xml we have 2 appender, which one of them may be deleted
+
+
+
+
+
+
+
+
+
+
+
+

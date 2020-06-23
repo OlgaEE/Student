@@ -12,6 +12,8 @@ import edu.javacourse.studentorder.domain.StudentOrder;
 import edu.javacourse.studentorder.domain.StudentOrderStatus;
 import edu.javacourse.studentorder.domain.University;
 import edu.javacourse.studentorder.exception.DaoException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,11 +26,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StudentOrderDaoImpl implements StudentOrderDao
 {
+    private static final Logger logger = LoggerFactory.getLogger(StudentOrderDaoImpl.class);
+
     private static final String INSERT_ORDER =
             "INSERT INTO jc_student_order(" +
                     " student_order_status, student_order_date, h_sur_name, " +
@@ -98,6 +103,9 @@ public class StudentOrderDaoImpl implements StudentOrderDao
     @Override
     public Long saveStudentOrder(StudentOrder so) throws DaoException {
         Long result = -1L;
+
+        logger.debug("SO:{}", so);
+
         try (Connection con = getConnection();
              PreparedStatement stmt = con.prepareStatement(INSERT_ORDER, new String[]{"student_order_id"})) {
             con.setAutoCommit(false);
@@ -125,6 +133,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao
                 throw ex;
             }
         } catch (SQLException ex) {
+            logger.error(ex.getMessage(), ex);
             throw new DaoException(ex);
         }
         return result;
@@ -204,6 +213,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao
 
             rs.close();
         } catch(SQLException ex) {
+            logger.error(ex.getMessage(), ex);
             throw new DaoException(ex);
         }
         return result;
@@ -223,6 +233,7 @@ public class StudentOrderDaoImpl implements StudentOrderDao
             findChildren(con, result);
             rs.close();
         } catch(SQLException ex) {
+            logger.error(ex.getMessage(), ex);
             throw new DaoException(ex);
         }
         return result;

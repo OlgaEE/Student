@@ -6,6 +6,8 @@ import edu.javacourse.studentorder.domain.PassportOffice;
 import edu.javacourse.studentorder.domain.RegisterOffice;
 import edu.javacourse.studentorder.domain.Street;
 import edu.javacourse.studentorder.exception.DaoException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,6 +19,8 @@ import java.util.List;
 
 public class DictionaryDaoImpl implements DictionaryDao
 {
+    private static final Logger logger = LoggerFactory.getLogger(DictionaryDaoImpl.class);
+
     private static final String GET_STREET = "SELECT street_code, street_name " +
             "FROM jc_street WHERE UPPER(street_name) LIKE UPPER(?)";
 
@@ -49,6 +53,7 @@ public class DictionaryDaoImpl implements DictionaryDao
                 result.add(str);
             }
         } catch (SQLException ex) {
+            logger.error(ex.getMessage(), ex);
             throw new DaoException(ex);
         }
 
@@ -72,6 +77,7 @@ public class DictionaryDaoImpl implements DictionaryDao
                 result.add(str);
             }
         } catch (SQLException ex) {
+            logger.error(ex.getMessage(), ex);
             throw new DaoException(ex);
         }
 
@@ -95,6 +101,7 @@ public class DictionaryDaoImpl implements DictionaryDao
                 result.add(str);
             }
         } catch (SQLException ex) {
+            logger.error(ex.getMessage(), ex);
             throw new DaoException(ex);
         }
 
@@ -121,6 +128,7 @@ public class DictionaryDaoImpl implements DictionaryDao
                 result.add(str);
             }
         } catch (SQLException ex) {
+            logger.error(ex.getMessage(), ex);
             throw new DaoException(ex);
         }
 
