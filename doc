@@ -1,0 +1,8 @@
+84 create DB city_register with tables and adding some data into
+
+85  dao.class PersonCheckDao
+    domain. class PersonResponse
+    domain. class PersonRequest
+    exception. class PersonCheckException
+
+86  
